@@ -92,11 +92,10 @@ export async function action({request, params}) {
       description: data.get('description'),
   };
 
-  const url = 'http://localhost:8080/events';
+  let url = 'http://localhost:8080/events';
 
   console.log(url)
   if(method === 'PATCH'){
-    console.log(url)
     const eventId = params.eventId;
     url = 'http://localhost:8080/events/' + eventId;
   };
