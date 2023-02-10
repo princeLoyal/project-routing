@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"gtrdgbt","image":"https://indigocrystal.com.ng/wp-content/uploads/2020/07/e282ca0c-5db8-43fa-8be9-e4a217b00002.jpg","date":"2023-02-01","description":"dtgt","id":"621785e0-7c52-4108-852d-02c90cc03d81"},{"title":"rgttrgtr","image":"http://elizabethrevents.com.ng/wp-content/uploads/2021/03/Image00337-768x512.jpg","date":"2023-03-03","description":"dtdgsh 54e5 5g4gh ","id":"007d4952-fed5-4341-8062-2d30afad2b9d"},{"title":"rbbrt","image":"https://indigocrystal.com.ng/wp-content/uploads/2020/07/e282ca0c-5db8-43fa-8be9-e4a217b00002.jpg","date":"2023-02-11","description":"trgtr","id":"5c187a3c-92e0-4c38-be52-0e15106e8eba"},{"title":"Another event","image":"https://indigocrystal.com.ng/wp-content/uploads/2020/07/e282ca0c-5db8-43fa-8be9-e4a217b00002.jpg","date":"2023-02-13","description":"A new event","id":"2a20c6e0-2330-4694-ba13-017d2e8f8b2e"},{"title":"A new event","image":"http://elizabethrevents.com.ng/wp-content/uploads/2021/03/Image00337-768x512.jpg","date":"2023-02-24","description":"An awesome event","id":"e579f309-0f1b-4a9a-98d7-f293d94b2d2d"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
