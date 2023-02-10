@@ -1,22 +1,41 @@
-import { Form, useNavigate } from 'react-router-dom';
+import { 
+  json, 
+  redirect, 
+  Form, 
+  useNavigate, 
+  useNavigation, 
+  useActionData
+ } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
+  const data = useActionData();
+  const navigation = useNavigation();
   const navigate = useNavigate();
+
+  const submiting = navigation.state === 'submitting';
+
   function cancelHandler() {
     navigate('..');
   }
 
   return (
-    <Form method='post' className={classes.form}>
+    <Form method={method} className={classes.form}>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map(err => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input 
         id="title" 
         type="text" 
         name="title" 
-        required 
+        required
         defaultValue={event? event.title: ''}
         />
       </p>
@@ -25,7 +44,7 @@ function EventForm({ method, event }) {
         <input 
         id="image" 
         type="url" name="image" 
-        required 
+        required
         defaultValue={event? event.image: ''}
         />
       </p>
@@ -35,7 +54,7 @@ function EventForm({ method, event }) {
         id="date" 
         type="date" 
         name="date"
-        required 
+        required
         defaultValue={event? event.date: ''}
         />
       </p>
@@ -45,7 +64,7 @@ function EventForm({ method, event }) {
         id="description" 
         name="description" 
         rows="5" 
-        required 
+        required
         defaultValue={event? event.description: ''}
         />
       </p>
@@ -53,10 +72,52 @@ function EventForm({ method, event }) {
         <button type="button" onClick={cancelHandler}>
           Cancel
         </button>
-        <button>Save</button>
+        <button disabled={submiting}>
+          {submiting? 'Submiting': 'Save'}
+        </button>
       </div>
     </Form>
   );
 }
 
 export default EventForm;
+
+export async function action({request, params}) {
+  const data = await request.formData();
+  const method = request.method;
+  const eventData = {
+      title: data.get('title'),
+      image: data.get('image'),
+      date: data.get('date'),
+      description: data.get('description'),
+  };
+
+  const url = 'http://localhost:8080/events';
+
+  console.log(url)
+  if(method === 'PATCH'){
+    console.log(url)
+    const eventId = params.eventId;
+    url = 'http://localhost:8080/events/' + eventId;
+  };
+
+  const response = await fetch(url,{
+      method: method,
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(eventData)
+  });
+
+  if(response.status === 422){
+      return response;
+  };
+
+  if(!response.ok){
+      throw json({message: 'Could not save event'}, {
+          status: 500
+      });
+  };
+
+ return redirect('/events');
+};
