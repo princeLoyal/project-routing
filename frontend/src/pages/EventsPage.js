@@ -11,7 +11,7 @@ function EventsPage() {
   // const events = data.events;
   
   return (
-    <Suspense>
+    <Suspense fallback={<p style={{textAlign: 'center'}}>Loading ...</p>}>
     <Await resolve={events}>
     {   (loadedEvent) => <EventsList events={loadedEvent}/> }
     </Await>
@@ -21,18 +21,21 @@ function EventsPage() {
 
 export default EventsPage;
 
-const loadEvents = async () => {
+async function loadEvents () {
   const response = await fetch('http://localhost:8080/events');
+
   if (!response.ok) {
-    throw json({message:' Could not fetch events'}), 
-    { status: 500}
+    throw json(
+      {message:' Could not fetch events'}, 
+      { status: 500});
   } else {
-   return response;
+     const resData = await response.json();
+     return resData.events;
   };
 };
 
 export function loader (){
-  defer({
+ return defer({
     events: loadEvents(),
   });
  };
